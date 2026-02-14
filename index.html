@@ -10,7 +10,7 @@ body{
 margin:0;
 overflow:hidden;
 background:black;
-font-family:Arial, sans-serif;
+font-family: 'Segoe UI', cursive;
 color:white;
 text-align:center;
 }
@@ -19,7 +19,9 @@ h1{
 position:absolute;
 top:40px;
 width:100%;
-font-size:28px;
+font-size:30px;
+color:#ff4fa3;
+text-shadow:0 0 15px pink;
 animation:brillo 2s infinite alternate;
 }
 
@@ -48,21 +50,34 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
+let stars = [];
+let heartParticles = [];
 
-function heartShape(t){
+// estrellas
+for(let i=0;i<300;i++){
+stars.push({
+x: Math.random()*canvas.width,
+y: Math.random()*canvas.height,
+size: Math.random()*2,
+speed: Math.random()*1+0.2
+});
+}
+
+// forma corazón matemática
+function heart(t){
 return {
-x: 16 * Math.pow(Math.sin(t),3),
-y: -(13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t))
+x: 16*Math.pow(Math.sin(t),3),
+y: -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))
 };
 }
 
-for(let i=0;i<1500;i++){
-let t = Math.random() * Math.PI * 2;
-let pos = heartShape(t);
-particles.push({
-x: canvas.width/2 + pos.x * 15,
-y: canvas.height/2 + pos.y * 15,
+// partículas del corazón
+for(let i=0;i<2000;i++){
+let t = Math.random()*Math.PI*2;
+let pos = heart(t);
+heartParticles.push({
+x: canvas.width/2 + pos.x*15,
+y: canvas.height/2 + pos.y*15,
 size: Math.random()*2+1
 });
 }
@@ -70,10 +85,24 @@ size: Math.random()*2+1
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
-particles.forEach(p=>{
-ctx.fillStyle="pink";
+// dibujar estrellas
+ctx.fillStyle="white";
+stars.forEach(s=>{
+ctx.fillRect(s.x,s.y,s.size,s.size);
+s.y += s.speed;
+if(s.y > canvas.height){
+s.y = 0;
+s.x = Math.random()*canvas.width;
+}
+});
+
+// dibujar corazón brillante
+heartParticles.forEach(p=>{
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fillStyle="rgba(255,105,180,0.9)";
+ctx.shadowColor="pink";
+ctx.shadowBlur=10;
 ctx.fill();
 });
 
@@ -81,13 +110,6 @@ requestAnimationFrame(draw);
 }
 
 draw();
-
-// Partículas tipo estrellas
-setInterval(()=>{
-ctx.fillStyle="white";
-ctx.fillRect(Math.random()*canvas.width,Math.random()*canvas.height,2,2);
-},50);
-
 </script>
 
 </body>
