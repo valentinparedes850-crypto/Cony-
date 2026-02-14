@@ -1,117 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Cony 💖</title>
-
-<style>
-body{
-margin:0;
-overflow:hidden;
-background:black;
-font-family: 'Segoe UI', cursive;
-color:white;
-text-align:center;
-}
-
-h1{
-position:absolute;
-top:40px;
-width:100%;
-font-size:30px;
-color:#ff4fa3;
-text-shadow:0 0 15px pink;
-animation:brillo 2s infinite alternate;
-}
-
-@keyframes brillo{
-from{opacity:0.6;}
-to{opacity:1;}
-}
-
-canvas{
-position:absolute;
-top:0;
-left:0;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Cony</title>
+    <meta http-equiv="refresh" content="0; url=https://baque2005.github.io/public-files/2025/11/f4ce8d64-132f-4e9e-894d-0cfa32187143.html">
 </head>
-
 <body>
-
-<h1>Te amo mucho Cony 💖</h1>
-<canvas id="canvas"></canvas>
-
-<script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let stars = [];
-let heartParticles = [];
-
-// estrellas
-for(let i=0;i<300;i++){
-stars.push({
-x: Math.random()*canvas.width,
-y: Math.random()*canvas.height,
-size: Math.random()*2,
-speed: Math.random()*1+0.2
-});
-}
-
-// forma corazón matemática
-function heart(t){
-return {
-x: 16*Math.pow(Math.sin(t),3),
-y: -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))
-};
-}
-
-// partículas del corazón
-for(let i=0;i<2000;i++){
-let t = Math.random()*Math.PI*2;
-let pos = heart(t);
-heartParticles.push({
-x: canvas.width/2 + pos.x*15,
-y: canvas.height/2 + pos.y*15,
-size: Math.random()*2+1
-});
-}
-
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-// dibujar estrellas
-ctx.fillStyle="white";
-stars.forEach(s=>{
-ctx.fillRect(s.x,s.y,s.size,s.size);
-s.y += s.speed;
-if(s.y > canvas.height){
-s.y = 0;
-s.x = Math.random()*canvas.width;
-}
-});
-
-// dibujar corazón brillante
-heartParticles.forEach(p=>{
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-ctx.fillStyle="rgba(255,105,180,0.9)";
-ctx.shadowColor="pink";
-ctx.shadowBlur=10;
-ctx.fill();
-});
-
-requestAnimationFrame(draw);
-}
-
-draw();
-</script>
-
+    <h1>@Cony</h1>
+    <p>Redirigiendo...</p>
 </body>
 </html>
-
