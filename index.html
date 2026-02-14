@@ -1,0 +1,64 @@
+<!DOCTYPE html>  <html lang="es">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Para Cony 💖</title>  
+<style>  
+body{  
+margin:0;  
+height:100vh;  
+display:flex;  
+justify-content:center;  
+align-items:center;  
+background: radial-gradient(circle at center, #ff9ad5, #ff4fa3, #c40062);  
+overflow:hidden;  
+font-family: 'Segoe UI', cursive;  
+text-align:center;  
+color:white;  
+}  h1{
+font-size:3rem;
+animation: latido 1.2s infinite;
+}
+
+p{
+font-size:1.4rem;
+margin:8px;
+}
+
+@keyframes latido{
+0%{transform:scale(1);}
+50%{transform:scale(1.15);}
+100%{transform:scale(1);}
+}
+
+.corazon{
+position:absolute;
+font-size:20px;
+animation: flotar 6s linear infinite;
+}
+
+@keyframes flotar{
+0%{transform:translateY(100vh); opacity:1;}
+100%{transform:translateY(-10vh); opacity:0;}
+}
+</style>
+
+</head>  
+<body>  <div>  
+<h1>Te Amo Muchote 💖</h1>  
+<p>Cony ✨</p>  
+<p>Eres mi lugar favorito en el mundo 🌎💕</p>  
+<p>Siempre tú ❤️</p>  
+</div>  <script>  
+function crearCorazon(){  
+const corazon=document.createElement("div");  
+corazon.classList.add("corazon");  
+corazon.innerHTML="💗";  
+corazon.style.left=Math.random()*100+"vw";  
+corazon.style.fontSize=(Math.random()*20+15)+"px";  
+document.body.appendChild(corazon);  
+setTimeout(()=>{corazon.remove();},6000);  
+}  
+setInterval(crearCorazon,300);  
+</script>  </body>  
+</html>
