@@ -1,64 +1,94 @@
-<!DOCTYPE html>  <html lang="es">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>Para Cony 💖</title>  
-<style>  
-body{  
-margin:0;  
-height:100vh;  
-display:flex;  
-justify-content:center;  
-align-items:center;  
-background: radial-gradient(circle at center, #ff9ad5, #ff4fa3, #c40062);  
-overflow:hidden;  
-font-family: 'Segoe UI', cursive;  
-text-align:center;  
-color:white;  
-}  h1{
-font-size:3rem;
-animation: latido 1.2s infinite;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Cony 💖</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:black;
+font-family:Arial, sans-serif;
+color:white;
+text-align:center;
 }
 
-p{
-font-size:1.4rem;
-margin:8px;
-}
-
-@keyframes latido{
-0%{transform:scale(1);}
-50%{transform:scale(1.15);}
-100%{transform:scale(1);}
-}
-
-.corazon{
+h1{
 position:absolute;
-font-size:20px;
-animation: flotar 6s linear infinite;
+top:40px;
+width:100%;
+font-size:28px;
+animation:brillo 2s infinite alternate;
 }
 
-@keyframes flotar{
-0%{transform:translateY(100vh); opacity:1;}
-100%{transform:translateY(-10vh); opacity:0;}
+@keyframes brillo{
+from{opacity:0.6;}
+to{opacity:1;}
+}
+
+canvas{
+position:absolute;
+top:0;
+left:0;
 }
 </style>
+</head>
 
-</head>  
-<body>  <div>  
-<h1>Te Amo Muchote 💖</h1>  
-<p>Cony ✨</p>  
-<p>Eres mi lugar favorito en el mundo 🌎💕</p>  
-<p>Siempre tú ❤️</p>  
-</div>  <script>  
-function crearCorazon(){  
-const corazon=document.createElement("div");  
-corazon.classList.add("corazon");  
-corazon.innerHTML="💗";  
-corazon.style.left=Math.random()*100+"vw";  
-corazon.style.fontSize=(Math.random()*20+15)+"px";  
-document.body.appendChild(corazon);  
-setTimeout(()=>{corazon.remove();},6000);  
-}  
-setInterval(crearCorazon,300);  
-</script>  </body>  
+<body>
+
+<h1>Te amo mucho Cony 💖</h1>
+<canvas id="canvas"></canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function heartShape(t){
+return {
+x: 16 * Math.pow(Math.sin(t),3),
+y: -(13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t))
+};
+}
+
+for(let i=0;i<1500;i++){
+let t = Math.random() * Math.PI * 2;
+let pos = heartShape(t);
+particles.push({
+x: canvas.width/2 + pos.x * 15,
+y: canvas.height/2 + pos.y * 15,
+size: Math.random()*2+1
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+ctx.fillStyle="pink";
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fill();
+});
+
+requestAnimationFrame(draw);
+}
+
+draw();
+
+// Partículas tipo estrellas
+setInterval(()=>{
+ctx.fillStyle="white";
+ctx.fillRect(Math.random()*canvas.width,Math.random()*canvas.height,2,2);
+},50);
+
+</script>
+
+</body>
 </html>
